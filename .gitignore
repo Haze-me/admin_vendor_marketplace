@@ -1,0 +1,48 @@
+# ==========================================
+# Django / Python
+# ==========================================
+
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Django stuff
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Static and media files
+staticfiles/
+media/
+
+# Environment variables
+.env
+.env.*
+
+# Coverage reports
+.coverage
+htmlcov/
+.coverage.*
+
+# Pytest
+.pytest_cache/
+
+# Mypy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
