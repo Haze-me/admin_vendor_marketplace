@@ -18,6 +18,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = config("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv(), default="localhost,127.0.0.1")
 
+# In Kubernetes, the kubelet probe hits the pod directly via its IP.
+# POD_IP is injected by the Downward API in the Helm chart.
+_pod_ip = os.environ.get("POD_IP", "")
+if _pod_ip:
+    ALLOWED_HOSTS = [*ALLOWED_HOSTS, _pod_ip]
+
 # ---------------------------------------------------------------------------
 # Application definition
 # ---------------------------------------------------------------------------
