@@ -20,5 +20,8 @@ LOGGING["loggers"]["django.db.backends"] = {  # noqa: F405
     "propagate": False,
 }
 
-# CORS: allow all in dev
+# CORS is handled by the API Gateway in production.
+# In development there is no gateway, so enable django-cors-headers locally.
+MIDDLEWARE.insert(1, "corsheaders.middleware.CorsMiddleware")  # noqa: F405
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
