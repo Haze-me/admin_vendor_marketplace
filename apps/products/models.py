@@ -97,6 +97,7 @@ class ProductImage(BaseModel):
         related_name="product_images",
     )
     image_url = models.URLField(max_length=1000)
+    object_key = models.CharField(max_length=1000, blank=True, default="")
     is_primary = models.BooleanField(default=False, db_index=True)
     display_order = models.PositiveIntegerField(default=0)
 

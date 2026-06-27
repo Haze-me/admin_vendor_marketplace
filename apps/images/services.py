@@ -85,7 +85,6 @@ class S3PresignedUrlService:
                     "Bucket": bucket_name,
                     "Key": object_key,
                     "ContentType": content_type,
-                    "ContentLength": MAX_FILE_SIZE_BYTES,
                 },
                 ExpiresIn=expiry,
             )

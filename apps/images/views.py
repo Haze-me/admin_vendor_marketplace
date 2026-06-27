@@ -63,7 +63,17 @@ class PresignedUploadUrlView(APIView):
                 product_id=product_id,
                 vendor_id=str(vendor.id),
             )
-        except (ValueError, RuntimeError) as e:
+        except ValueError as e:
+            logger.warning(
+                "Presigned URL validation error vendor=%s product=%s: %s",
+                vendor.id, product_id, e,
+            )
+            raise BusinessRuleViolation(str(e))
+        except RuntimeError as e:
+            logger.error(
+                "Presigned URL generation failed vendor=%s product=%s: %s",
+                vendor.id, product_id, e, exc_info=True,
+            )
             raise BusinessRuleViolation(str(e))
 
         logger.info(

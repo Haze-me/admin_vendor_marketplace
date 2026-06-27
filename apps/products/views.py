@@ -147,6 +147,7 @@ class ProductImageView(APIView):
         image = ProductService.add_product_image(
             product=product,
             image_url=serializer.validated_data["image_url"],
+            object_key=serializer.validated_data.get("object_key", ""),
             is_primary=serializer.validated_data.get("is_primary", False),
             display_order=serializer.validated_data.get("display_order", 0),
         )

@@ -167,5 +167,5 @@ class ProductImageAddSerializer(serializers.ModelSerializer):
     """Add an image URL to a product after S3 upload."""
     class Meta:
         model = ProductImage
-        fields = ["id", "image_url", "is_primary", "display_order"]
+        fields = ["id", "image_url", "object_key", "is_primary", "display_order"]
         read_only_fields = ["id"]

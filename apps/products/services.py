@@ -120,10 +120,17 @@ class ProductService:
             logger.error("Failed to publish product.deleted event: %s", e)
 
     @staticmethod
-    def add_product_image(product: Product, image_url: str, is_primary: bool, display_order: int) -> ProductImage:
+    def add_product_image(
+        product: Product,
+        image_url: str,
+        is_primary: bool,
+        display_order: int,
+        object_key: str = "",
+    ) -> ProductImage:
         image = ProductImage.objects.create(
             product=product,
             image_url=image_url,
+            object_key=object_key,
             is_primary=is_primary,
             display_order=display_order,
         )
@@ -144,6 +151,10 @@ class ProductService:
 
     @staticmethod
     def delete_product_image(image: ProductImage) -> None:
+        from apps.images.services import S3PresignedUrlService
         product = image.product
+        object_key = image.object_key
         image.delete()
+        if object_key:
+            S3PresignedUrlService.delete_object(object_key)
         logger.info("Image deleted from product %s", product.id)
